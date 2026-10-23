@@ -23,6 +23,16 @@
   </header>
 
   <main class="wrap">
+    <section class="panel" id="login-panel" hidden>
+      <h2>비밀번호를 입력해 주세요</h2>
+      <p class="hint">관계자에게 받은 조회 비밀번호를 넣으면 매출현황을 볼 수 있습니다.</p>
+      <div class="form-row">
+        <label>비밀번호 <input type="password" id="view-key" autocomplete="current-password"></label>
+        <button type="button" class="btn btn-primary" id="view-go">열기</button>
+      </div>
+      <p class="error" id="view-error" hidden></p>
+    </section>
+
     <section class="panel" id="add-panel" hidden>
       <h2>새 월 보고 추가</h2>
       <p class="hint">가장 최근 보고의 값이 기본값으로 들어갑니다. 바뀐 숫자만 고친 뒤 저장하세요.</p>

@@ -97,9 +97,13 @@
     }
     if (!silent) status('불러오는 중…');
     try {
-      const res = await fetch(API + (API.includes('?') ? '&' : '?') + 't=' + Date.now());
+      let viewKey = '';
+      try { viewKey = sessionStorage.getItem('sales-view') || ''; } catch (e) { /* 저장소 없음 */ }
+      const res = await fetch(API + (API.includes('?') ? '&' : '?') + 't=' + Date.now() + '&key=' + encodeURIComponent(viewKey));
       const j = await res.json();
+      if (j.needView) { showLogin(viewKey ? j.error : ''); status(''); return; }
       if (!j.ok) throw new Error(j.error || '응답 오류');
+      $('login-panel').hidden = true;
       needKey = !!j.needKey;
       if (mode !== 'view') return;
       ingest(j.rows || []);
@@ -110,6 +114,22 @@
       if (!silent) { banner('데이터를 불러오지 못했습니다. 잠시 후 새로고침해 주세요. (' + e.message + ')', true); status(''); }
     }
   }
+
+  function showLogin(err) {
+    months = {}; order = []; cur = null;
+    render();
+    $('btn-add').disabled = true;
+    $('login-panel').hidden = false;
+    $('view-error').textContent = err || '';
+    $('view-error').hidden = !err;
+    $('view-key').focus();
+  }
+  function submitLogin() {
+    try { sessionStorage.setItem('sales-view', $('view-key').value); } catch (e) { /* 저장소 없음 */ }
+    load();
+  }
+  $('view-go').addEventListener('click', submitLogin);
+  $('view-key').addEventListener('keydown', (e) => { if (e.key === 'Enter') submitLogin(); });
 
   async function post(body) {
     const res = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) });
