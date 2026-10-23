@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>매출집계</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-in">
+      <h1 class="brand">매출집계</h1>
+      <div class="actions">
+        <span class="status" id="status" aria-live="polite"></span>
+        <button type="button" class="btn" id="btn-add">추가하기</button>
+        <button type="button" class="btn btn-primary" id="btn-edit">수정하기</button>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs" aria-label="보고 월"></nav>
+  </header>
+
+  <main class="wrap">
+    <section class="panel" id="add-panel" hidden>
+      <h2>새 월 보고 추가</h2>
+      <p class="hint">가장 최근 보고의 값이 기본값으로 들어갑니다. 바뀐 숫자만 고친 뒤 저장하세요.</p>
+      <div class="form-row">
+        <label>보고 월 <input type="month" id="add-month"></label>
+        <label>누적 실적 기준일 <input type="date" id="add-asof"></label>
+        <button type="button" class="btn btn-primary" id="add-start">작성 시작</button>
+        <button type="button" class="btn" id="add-cancel">닫기</button>
+      </div>
+      <p class="error" id="add-error" hidden></p>
+    </section>
+
+    <div class="banner" id="banner" hidden></div>
+    <div id="report" class="report"></div>
+
+    <section class="trend" id="trend-wrap" hidden>
+      <h2 class="trend-title">월별 총합계 비교</h2>
+      <p class="hint">각 월 보고의 총합계입니다. 행을 누르면 그 달 보고로 이동합니다. [단위 : 백만원]</p>
+      <div class="scroll"><table class="xl trend-table" id="trend"></table></div>
+    </section>
+  </main>
+
+  <div class="editbar" id="editbar" hidden>
+    <div class="editbar-in">
+      <label>수정자 <input type="text" id="editor-name" maxlength="20" placeholder="이름"></label>
+      <label id="key-wrap" hidden>편집 비밀번호 <input type="password" id="edit-key" autocomplete="off"></label>
+      <span class="error" id="save-error" hidden></span>
+      <span class="spacer"></span>
+      <button type="button" class="btn btn-danger" id="btn-delete" hidden>이 달 보고 삭제</button>
+      <button type="button" class="btn" id="btn-cancel">취소</button>
+      <button type="button" class="btn btn-primary" id="btn-save">저장</button>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

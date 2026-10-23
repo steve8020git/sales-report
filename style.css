@@ -1,0 +1,98 @@
+/* 엑셀 보고서(맑은 고딕, 금색 머리글, 하늘색 본부, 살구색 합계, 노란 총합계)를 그대로 옮긴 스타일 */
+:root {
+  --xl-head: #ffc000;
+  --xl-div: #deebf7;
+  --xl-sum: #fbe5d6;
+  --xl-total: #ffff00;
+  --xl-line: #000;
+  --xl-grid: #9a9a9a;
+  --neg: #e00000;
+  --bg: #f3f4f6;
+  --paper: #fff;
+  --fg: #111;
+  --muted: #5b6270;
+  --accent: #1f5fbf;
+  --danger: #c62828;
+  --font: '맑은 고딕', 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 14px; }
+[hidden] { display: none !important; }
+
+.topbar { position: sticky; top: 0; z-index: 20; background: var(--paper); border-bottom: 1px solid #d5d8de; }
+.topbar-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 10px max(16px, env(safe-area-inset-left)); max-width: 1180px; margin: 0 auto; }
+.brand { font-size: 18px; margin: 0; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.status { color: var(--muted); font-size: 12px; }
+.tabs { display: flex; gap: 2px; overflow-x: auto; padding: 0 max(16px, env(safe-area-inset-left)); max-width: 1180px; margin: 0 auto; }
+.tab { font: inherit; font-size: 13px; border: 1px solid #c8ccd4; border-bottom: 0; background: #e9ebef; color: var(--muted); padding: 6px 14px; border-radius: 4px 4px 0 0; cursor: pointer; white-space: nowrap; }
+.tab[aria-selected="true"] { background: var(--paper); color: #107c41; font-weight: 700; border-color: #107c41; box-shadow: inset 0 2px 0 #107c41; }
+.tab.draft { font-style: italic; }
+
+.btn { font: inherit; font-size: 13px; padding: 7px 14px; border-radius: 4px; border: 1px solid #c3c7cf; background: var(--paper); color: var(--fg); cursor: pointer; }
+.btn:hover { background: #f1f3f6; }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-primary:hover { background: #184c99; }
+.btn-danger { color: var(--danger); border-color: #e5b3b3; }
+.btn:disabled { opacity: .5; cursor: default; }
+.btn:focus-visible, .tab:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 20px max(16px, env(safe-area-inset-left)) 120px; display: grid; gap: 20px; }
+.panel { background: var(--paper); border: 1px solid #d5d8de; border-radius: 6px; padding: 16px; }
+.panel h2 { font-size: 15px; margin: 0 0 4px; }
+.hint { color: var(--muted); font-size: 12px; margin: 0 0 10px; }
+.form-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+.form-row label, .editbar label { display: grid; gap: 4px; font-size: 12px; color: var(--muted); }
+input[type=month], input[type=date], input[type=text], input[type=password] { font: inherit; font-size: 13px; padding: 6px 8px; border: 1px solid #c3c7cf; border-radius: 4px; background: #fff; color: var(--fg); }
+.error { color: var(--danger); font-size: 13px; margin: 6px 0 0; }
+.banner { background: #fff8e1; border: 1px solid #f0d58c; border-radius: 6px; padding: 10px 14px; font-size: 13px; }
+.banner.err { background: #fdecea; border-color: #f5c2c0; }
+
+.report { background: var(--paper); border: 1px solid #d5d8de; border-radius: 6px; padding: 20px 20px 28px; overflow-x: auto; }
+.report-title { font-size: 15px; font-weight: 700; margin: 0 0 6px; }
+.report-unit { text-align: right; font-size: 13px; margin: 0 0 4px; min-width: 900px; }
+.report-meta { color: var(--muted); font-size: 12px; margin: 10px 0 0; }
+.scroll { overflow-x: auto; }
+
+table.xl { border-collapse: collapse; min-width: 900px; width: 100%; font-variant-numeric: tabular-nums; border: 2px solid var(--xl-line); }
+table.xl + table.xl { margin-top: 22px; }
+.xl th, .xl td { border: 1px solid var(--xl-grid); padding: 3px 8px; height: 26px; text-align: center; white-space: nowrap; }
+.xl thead th { background: var(--xl-head); font-weight: 700; border-color: var(--xl-line); }
+.xl thead tr:last-child th { border-bottom: 3px solid var(--xl-line); }
+.xl th.div { background: var(--xl-div); font-weight: 700; border-right: 2px solid var(--xl-line); width: 150px; }
+.xl td.team { font-weight: 700; width: 170px; border-right: 2px solid var(--xl-line); }
+.xl td.num { text-align: right; }
+.xl td.num.c2, .xl td.num.c4, .xl td.num.c6 { border-right: 2px solid var(--xl-line); }
+.xl tr.sum th, .xl tr.sum td { background: var(--xl-sum); font-weight: 700; border-top: 2px solid var(--xl-line); border-bottom: 2px solid var(--xl-line); }
+.xl tr.total th, .xl tr.total td { background: var(--xl-total); font-weight: 700; border-top: 2px solid var(--xl-line); }
+.xl tr.gap td { height: 10px; padding: 0; border-left: 0; border-right: 0; }
+.xl .neg { color: var(--neg); }
+.xl td.blank { background: #fff; }
+
+/* 편집 모드 */
+.editing .xl td.num, .editing .xl td.team, .editing .xl th.div { padding: 2px 3px; }
+.xl input.cell { width: 100%; min-width: 72px; font: inherit; text-align: right; border: 1px solid #b7c6e4; background: #f5f9ff; padding: 3px 5px; border-radius: 2px; font-variant-numeric: tabular-nums; }
+.xl input.name { text-align: center; font-weight: 700; min-width: 110px; }
+.xl input.cell.changed { background: #fff3c4; border-color: #e0b400; }
+.cell-tools { display: flex; gap: 3px; align-items: center; }
+.mini { font: inherit; font-size: 11px; border: 1px solid #c3c7cf; background: #fff; border-radius: 3px; padding: 1px 6px; cursor: pointer; color: var(--muted); white-space: nowrap; }
+.mini:hover { color: var(--fg); }
+.mini.del:hover { color: var(--danger); border-color: var(--danger); }
+.asof-edit { display: inline-flex; align-items: center; gap: 4px; }
+.asof-edit input { font-size: 12px; padding: 1px 4px; }
+.add-div { margin-top: 8px; }
+
+.trend { background: var(--paper); border: 1px solid #d5d8de; border-radius: 6px; padding: 20px; }
+.trend-title { font-size: 15px; margin: 0 0 4px; }
+.trend-table tbody tr { cursor: pointer; }
+.trend-table tbody tr:hover td { background: #f3f7ff; }
+.trend-table tbody tr.cur td { background: #eaf2ff; font-weight: 700; }
+
+.editbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: var(--paper); border-top: 2px solid var(--accent); box-shadow: 0 -4px 16px rgba(0,0,0,.08); padding-bottom: env(safe-area-inset-bottom); }
+.editbar-in { max-width: 1180px; margin: 0 auto; padding: 10px max(16px, env(safe-area-inset-left)); display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px; }
+.editbar .spacer { flex: 1; }
+
+@media (max-width: 600px) {
+  .report, .trend { padding: 14px 12px; }
+}
